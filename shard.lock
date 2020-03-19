@@ -1,0 +1,14 @@
+version: 1.0
+shards:
+  admiral:
+    github: djmaze/admiral.cr
+    commit: cc2e9626b7891bdba254bcd55b1dca9a57891fc5
+
+  spectator:
+    gitlab: arctic-fox/spectator
+    version: 0.8.3
+
+  ssh2:
+    github: spider-gazelle/ssh2.cr
+    version: 1.2.4
+

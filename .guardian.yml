@@ -1,0 +1,8 @@
+files: ./src/**/*.cr
+run: shards build && bin/swm
+---
+files: ./shard.yml
+run: shards install
+---
+files: ./spec/**/*.cr
+run: sudo -E crystal spec
