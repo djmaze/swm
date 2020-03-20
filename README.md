@@ -4,7 +4,7 @@ The missing tooling for a great Docker swarm experience
 
 ## Introduction
 
-Docker swarm mode is a container orchestration system with the just the right level of abstraction for small to medium sized infrastructures. In contrast to alternatives like Kubernetes, it has a relatively low level of complexity while being quite developer-friendly. 
+Docker swarm mode is a container orchestration system with just the right level of abstraction for small to medium sized infrastructures. In contrast to alternatives like Kubernetes, it has a relatively low level of complexity while being quite developer-friendly. 
 
 That said, the current interface is lacking especially in terms of managing cluster nodes and applications. `swm` aims to be the missing piece for managing services and containers using *infrastructure as code* with a minimum amount of boilerplate. 
 
