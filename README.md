@@ -13,39 +13,25 @@ In practice, `swm` can be used as a commandline extension to the main `docker` C
 
 ## Installation
 
-You can either download a prebuilt binary (Linux only) or build it yourself (Linux / Mac).
+You can either download a prebuilt binary (Linux only) or build it yourself (Linux / Mac). (See below for build instructions.)
 
-### Download
+The latest version can be downloaded from the [releases](https://github.com/djmaze/swm/releases) page.
 
-Find the latest version on the [releases](https://github.com/djmaze/swm/releases) page.
 
-### Build
+#### Standalone
 
-* Install [Crystal](https://crystal-lang.org) >= 0.33.0
-* Clone this repository
-* Build the binary:
-    ```bash
-    shards build
-    ```
+Copy the binary into a directory in your `PATH`. Then just run `swm` in order to use it.
 
-If the build was successful, you can find the final executable at `bin/swm`. 
-
-## Usage
-
-### Standalone
-
-Copy it into a directory in your `PATH`. Then just run `swm` in order to use it.
-
-### Docker commandline extension
+#### Docker commandline extension
 
 Alternatively, you can install it as a docker commandline extension:
 
 ```bash
 mkdir -p ~/.docker/cli-plugins
-cp bin/swm ~/.docker/cli-plugins/docker-swm
+cp swm ~/.docker/cli-plugins/docker-swm
 ```
 
-Now, you can run it using `docker swm [...]`
+Now, you can run it using `docker swm`
 
 ## Usage
 
@@ -58,6 +44,17 @@ Commands are grouped into three categories:
 Try out `swm cluster`, `swm stack` or `swm service` in order to find the available commands.
 
 ## Development
+
+### Build
+
+* Install [Crystal](https://crystal-lang.org) >= 0.33.0
+* Clone this repository
+* Build the binary:
+    ```bash
+    shards build
+    ```
+
+If the build was successful, you can find the final executable at `bin/swm`. 
 
 TODO: Write development instructions here
 
