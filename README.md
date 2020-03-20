@@ -13,6 +13,14 @@ In practice, `swm` can be used as a commandline extension to the main `docker` C
 
 ## Installation
 
+You can either download a prebuilt binary (Linux only) or build it yourself (Linux / Mac).
+
+### Download
+
+Find the latest version on the [releases](https://github.com/djmaze/swm/releases) page.
+
+### Build
+
 * Install [Crystal](https://crystal-lang.org) >= 0.33.0
 * Clone this repository
 * Build the binary:
@@ -22,7 +30,9 @@ In practice, `swm` can be used as a commandline extension to the main `docker` C
 
 If the build was successful, you can find the final executable at `bin/swm`. 
 
-### Standalone usage 
+## Usage
+
+### Standalone
 
 Copy it into a directory in your `PATH`. Then just run `swm` in order to use it.
 
