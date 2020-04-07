@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/djmaze/swm/tree/0.1.1) (2020-04-07)
+
+[Full Changelog](https://github.com/djmaze/swm/compare/0.1.0...0.1.1)
+
+**Implemented enhancements:**
+
+- Replace env variables in stack yaml also in places where docker does not do it [\#2](https://github.com/djmaze/swm/pull/2) ([djmaze](https://github.com/djmaze))
+
 ## [0.1.0](https://github.com/djmaze/swm/tree/0.1.0) (2020-03-20)
 
 [Full Changelog](https://github.com/djmaze/swm/compare/c28e8ff0a2aa6e94e095f6bb05a373b62b2ad0ae...0.1.0)
