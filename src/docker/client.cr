@@ -30,12 +30,14 @@ module Swm
       end
     end
 
-    def exec(command : String, node : Node? = nil, replace = false, output = Process::Redirect::Inherit, env = {} of String => String)
+    def exec(command : String, node : Node? = nil, replace = false, output = Process::Redirect::Inherit, input = Process::Redirect::Inherit, env = {} of String => String)
       if replace
         cmd, args = args_for command, node
-        Process.new(cmd, args, input: Process::Redirect::Inherit, output: output, error: output, env: env).wait
+        Process.new(cmd, args, input: input, output: output, error: output, env: env).wait
         output.to_s
       else
+        raise "Input for ssh not allowed" if input != Process::Redirect::Inherit
+
         output = IO::Memory.new
         @ssh_session.open_session do |channel|
           run_command_in_channel("docker " + command, channel, output, env: env)

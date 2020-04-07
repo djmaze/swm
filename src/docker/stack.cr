@@ -11,7 +11,19 @@ module Swm
     end
 
     def deploy(replicas = 1, env : Process::Env = {} of String => String)
-      client.exec "stack deploy -c #{@yml} --with-registry-auth #{name}", replace: true, env: {"APP_REPLICAS" => replicas.to_s}.merge(env)
+      deploy_env = {
+        "STACK" => name,
+        "APP_REPLICAS" => replicas.to_s
+      }.merge(env)
+
+      preprocess_yaml(deploy_env) do |preprocessed_yml|
+        client.exec(
+          "stack deploy -c - --with-registry-auth #{name}",
+          replace: true,
+          input: IO::Memory.new(preprocessed_yml),
+          env: deploy_env
+        )
+      end
     end
 
     def wait_for_deploy
@@ -61,6 +73,16 @@ module Swm
 
     def to_s
       @name
+    end
+
+    private def preprocess_yaml(env : Process::Env = {} of String => String, &block : String -> )
+      content = File.read(yml)
+      env.each do |key, value|
+        content = content
+          .gsub("$#{key}", value)
+          .gsub("${#{key}}", value)
+      end
+      yield content
     end
 
     private def client : DockerClient
