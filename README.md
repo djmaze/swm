@@ -47,16 +47,29 @@ Try out `swm cluster`, `swm stack` or `swm service` in order to find the availab
 
 ### Build
 
+You can build the binary locally or via Docker.
+
+When using Docker, the binary will be statically linked. It can thus be used on any amd64-compatible Linux system.
+
+#### Local
+
 * Install [Crystal](https://crystal-lang.org) >= 0.33.0
 * Clone this repository
 * Build the binary:
     ```bash
     shards build
     ```
-
 If the build was successful, you can find the final executable at `bin/swm`. 
 
-TODO: Write development instructions here
+#### With Docker
+
+* Install Docker and `make`
+* Clone this repository
+* Build the binary:
+    ```bash
+    sudo -E make
+    ```
+If the build was successful, you can find the final executable at `bin/swm`. 
 
 ## TODO
 
