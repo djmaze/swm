@@ -4,4 +4,3 @@
 /.shards/
 *.dwarf
 docker-compose.yml
-Dockerfile
