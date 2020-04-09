@@ -13,7 +13,7 @@ module Swm
       long: "use-local-ips"
 
     def run
-      @cluster = Cluster.load(cluster_id)
+      @cluster = Cluster.load_or_initialize(cluster_id, docker_client)
       info "Updating node list for cluster #{cluster.to_s} via #{docker_client.host}.."
       cluster.fetch_nodes(docker_client)
       puts cluster.to_h

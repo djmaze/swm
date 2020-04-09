@@ -4,12 +4,13 @@ module Swm
   class Service
     getter name : String
 
-    def self.create(name : String, cluster : Cluster, image : String, options : String, command : String)
-      DockerClient.for_cluster(cluster).exec "service create --name #{name} #{options} #{image} #{command}"
-      new name, cluster
+    def self.create(name : String, cluster : Cluster, image : String, options : String, command : String, client : DockerClient?)
+      client ||= DockerClient.for_cluster(cluster)
+      client.exec "service create --name #{name} #{options} #{image} #{command}"
+      new name, cluster, client
     end
 
-    def initialize(@name : String, @cluster : Cluster)
+    def initialize(@name : String, @cluster : Cluster, @client : DockerClient? = nil)
     end
 
     def containers : Array(Container)
@@ -62,7 +63,7 @@ module Swm
     end
 
     private def client : DockerClient
-      DockerClient.for_cluster(@cluster)
+      @client ||= DockerClient.for_cluster(@cluster)
     end
   end
 end
