@@ -27,7 +27,8 @@ module Swm
         SERVICE_NAME, cluster,
         image: "alpine",
         options: "--mode global --restart-condition on-failure --detach --quiet",
-        command: "sh -c 'apk add --no-cache curl jq && curl -s ipinfo.io | jq -r .ip'"
+        command: "sh -c 'apk add --no-cache curl jq && curl -s ipinfo.io | jq -r .ip'",
+        client: client
       )
       service.get_last_output_line.map do |line|
         name, ip = line.split

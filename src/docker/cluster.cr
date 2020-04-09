@@ -23,7 +23,7 @@ module Swm
 
     def self.all
       Dir.glob(File.join(@@config_dir, "*.json")).map do |path|
-        Cluster.load(File.basename(path, ".json"))
+        Cluster.load(File.basename(path, ".json")).not_nil!
       end
     end
 
@@ -37,7 +37,13 @@ module Swm
       end
     end
 
-    def self.load(id : String) : Cluster
+    def self.load_or_initialize(id : String, client : DockerClient) : Cluster
+      load(id) || new(id, client)
+    end
+
+    def self.load(id : String) : Cluster?
+      return unless File.exists?(filename(id))
+
       file = File.open(filename(id), "r")
       begin
         output = file.gets_to_end
