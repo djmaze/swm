@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.3](https://github.com/djmaze/swm/tree/0.1.3) (2020-04-09)
+
+[Full Changelog](https://github.com/djmaze/swm/compare/0.1.2...0.1.3)
+
+**Fixed bugs:**
+
+- Fix fetching swarm nodes for a new \(unknown\) cluster [\#4](https://github.com/djmaze/swm/pull/4) ([djmaze](https://github.com/djmaze))
+
 ## [0.1.2](https://github.com/djmaze/swm/tree/0.1.2) (2020-04-07)
 
 [Full Changelog](https://github.com/djmaze/swm/compare/0.1.1...0.1.2)
