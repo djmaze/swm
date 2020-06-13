@@ -15,7 +15,7 @@ module Swm
         options = [] of String
         options << "--user=#{user}" if user
         options << "-t" unless no_tty
-        client.exec "exec -i #{options.join(" ")} #{id} #{command}", replace: true, output: output
+        client.exec "exec -i #{options.join(" ")} #{id} #{command}", output: output
       end
 
       def stop
