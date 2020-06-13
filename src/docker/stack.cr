@@ -19,7 +19,6 @@ module Swm
       preprocess_yaml(deploy_env) do |preprocessed_yml|
         client.exec(
           "stack deploy -c - --with-registry-auth #{name}",
-          replace: true,
           input: IO::Memory.new(preprocessed_yml),
           env: deploy_env
         )
