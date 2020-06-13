@@ -14,7 +14,7 @@ dependencies:
     branch: master
   ssh2:
     github: spider-gazelle/ssh2.cr
-    version: 1.2.4
+    version: 1.4.0
 
 development_dependencies:
   spectator:
