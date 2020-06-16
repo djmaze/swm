@@ -48,7 +48,7 @@ module Swm
       begin
         yield
       ensure
-        process.kill(Signal::INT) if watch
+        process.kill(Signal::INT)
         process.wait
       end
     end

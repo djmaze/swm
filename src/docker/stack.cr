@@ -20,6 +20,7 @@ module Swm
         client.exec(
           "stack deploy -c - --with-registry-auth #{name}",
           input: IO::Memory.new(preprocessed_yml),
+          show_output: true,
           env: deploy_env
         )
       end
