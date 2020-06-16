@@ -4,9 +4,9 @@ module Swm
   class LocalDockerExecutor
     def initialize(@default_host : String); end
 
-    def exec(command : String, node : Node? = nil, output : IO? = nil, input = Process::Redirect::Inherit, env = {} of String => String) : String
+    def exec(command : String, node : Node? = nil, show_output = false, output = Process::Redirect::Inherit, input = Process::Redirect::Inherit, env = {} of String => String) : String
       cmd, args = args_for command, node
-      output ||= IO::Memory.new
+      output = IO::Memory.new unless show_output
       Process.new(cmd, args, input: input, output: output, error: output, env: env).wait
       output.to_s.strip
     end
