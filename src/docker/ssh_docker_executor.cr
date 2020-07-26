@@ -13,30 +13,29 @@ module Swm
     end
 
     def exec_async(command : String, show_output = false, watch = false)
+      signal_channel = Channel(Nil).new
+      exit_channel = Channel(Nil).new
       output = show_output ? STDOUT : IO::Memory.new
-      process = fork do
+
+      spawn do
         uri = URI.parse(@host)
         async_ssh_session = SSH2::Session.connect(uri.hostname.not_nil!)
         async_ssh_session.login_with_agent(uri.user.not_nil!)
         if watch
           buffer = IO::Memory.new
-          # Output result one more time when being killed
-          Signal::INT.trap do
-            async_ssh_session.open_session do |channel|
-              buffer.clear()
-              run_command_in_channel("docker " + command, channel, buffer)
-              Process.run("clear", ["-x"], output: output, error: output)
-              STDOUT.write(buffer.to_slice)
-              exit
-            end
-          end
-          while true
+          loop do
             async_ssh_session.open_session do |channel|
               run_command_in_channel("docker " + command, channel, buffer)
               Process.run("clear", ["-x"], output: output, error: output)
               STDOUT.write(buffer.to_slice)
-              buffer.clear()
-              sleep WATCH_INTERVAL_IN_SECONDS
+
+              if signal_channel.closed?
+                exit_channel.send(nil)
+                break
+              else
+                buffer.clear()
+                sleep WATCH_INTERVAL_IN_SECONDS
+              end
             end
           end
         else
@@ -45,11 +44,12 @@ module Swm
           end
         end
       end
+
       begin
         yield
       ensure
-        process.kill(Signal::INT)
-        process.wait
+        signal_channel.close
+        exit_channel.receive
       end
     end
 
