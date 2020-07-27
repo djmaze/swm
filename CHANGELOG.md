@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.1.5](https://github.com/djmaze/swm/tree/0.1.5) (2020-07-27)
+[Full Changelog](https://github.com/djmaze/swm/compare/0.1.4...0.1.5)
+
+**Fixed bugs:**
+
+- Local fetch does not work correctly [\#1](https://github.com/djmaze/swm/issues/1)
+- Get node ip using manager status if missing [\#10](https://github.com/djmaze/swm/pull/10) ([djmaze](https://github.com/djmaze))
+
 ## [0.1.4](https://github.com/djmaze/swm/tree/0.1.4) (2020-07-26)
 [Full Changelog](https://github.com/djmaze/swm/compare/0.1.3...0.1.4)
 
