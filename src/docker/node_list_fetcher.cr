@@ -10,6 +10,11 @@ module Swm
       new_nodes = [] of Node
       client.exec("node ls --format '{{.Hostname}}'").split("\n").each do |name|
         role, ip, user = client.exec("node inspect -f '{{.Spec.Role}}|{{.Status.Addr}}|{{.Spec.Labels.ssh_user}}' #{name}").split("|")
+        if role == "manager" && ip == "0.0.0.0"
+          # Workaround for Docker bug, see https://github.com/moby/moby/issues/35437
+          ip = client.exec("node inspect -f '{{.ManagerStatus.Addr}}' #{name}").split(':')[0]
+        end
+        raise "Could not get ip for #{name}" if ip.blank?
         user = "root" if user == "<no value>"
         new_nodes << Node.new(
           hostname: name,
