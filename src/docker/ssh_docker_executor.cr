@@ -48,8 +48,10 @@ module Swm
       begin
         yield
       ensure
-        signal_channel.close
-        exit_channel.receive
+        if watch
+          signal_channel.close
+          exit_channel.receive
+        end
       end
     end
 
