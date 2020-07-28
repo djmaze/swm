@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.1.6](https://github.com/djmaze/swm/tree/0.1.6) (2020-07-28)
+[Full Changelog](https://github.com/djmaze/swm/compare/0.1.5...0.1.6)
+
+**Fixed bugs:**
+
+- Do not wait for non-watched async commands to exit [\#11](https://github.com/djmaze/swm/pull/11) ([djmaze](https://github.com/djmaze))
+
 ## [0.1.5](https://github.com/djmaze/swm/tree/0.1.5) (2020-07-27)
 [Full Changelog](https://github.com/djmaze/swm/compare/0.1.4...0.1.5)
 
