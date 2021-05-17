@@ -4,6 +4,10 @@ shards:
     github: djmaze/admiral.cr
     commit: cc2e9626b7891bdba254bcd55b1dca9a57891fc5
 
+  poncho:
+    github: icyleaf/poncho
+    version: 0.3.0
+
   spectator:
     gitlab: arctic-fox/spectator
     version: 0.8.3
