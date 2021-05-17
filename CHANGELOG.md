@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.2.0](https://github.com/djmaze/swm/tree/0.2.0) (2021-05-17)
+[Full Changelog](https://github.com/djmaze/swm/compare/0.1.6...0.2.0)
+
+**Implemented enhancements:**
+
+- Allow using stack-specific env files [\#16](https://github.com/djmaze/swm/pull/16) ([djmaze](https://github.com/djmaze))
+
 ## [0.1.6](https://github.com/djmaze/swm/tree/0.1.6) (2020-07-28)
 [Full Changelog](https://github.com/djmaze/swm/compare/0.1.5...0.1.6)
 
