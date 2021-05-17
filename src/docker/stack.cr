@@ -41,20 +41,20 @@ module Swm
       @script_stack ||= Stack.new("#{name}_script", cluster: @cluster, yml: script_yml)
     end
 
-    def predeploy(command : String)
+    def predeploy(command : String, env : Process::Env = {} of String => String)
       remove!
       deploy env: {
         "STACK" => original_stack_name,
         "SCRIPT_COMMAND" => command
-      }
+      }.merge(env)
     end
 
-    def postdeploy(command : String)
+    def postdeploy(command : String, env : Process::Env = {} of String => String)
       remove!
       deploy env: {
         "STACK" => original_stack_name,
         "SCRIPT_COMMAND" => command
-      }
+      }.merge(env)
     end
 
     def remove!
