@@ -2,7 +2,7 @@ FROM alpine AS libs
 
 RUN apk add cmake curl gcc git libc-dev linux-headers make openssl-dev perl
 
-ARG LIBSSH2_VERSION=1.9.0
+ARG LIBSSH2_VERSION=1.11.0
 RUN cd /tmp \
  && git clone -b libssh2-${LIBSSH2_VERSION} --single-branch https://github.com/libssh2/libssh2.git \
  && cd libssh2 \
@@ -14,10 +14,10 @@ RUN cd /tmp \
  && cd /tmp \
  && rm /tmp/libssh2 -fR
 
-ARG OPENSSL_MAJOR_VERSION=1.1.1
-ARG OPENSSL_PATCH_RELEASE=e
+ARG OPENSSL_MAJOR_VERSION=3.3.0
+ARG OPENSSL_PATCH_RELEASE=
 RUN cd /tmp \
- && curl -sL https://www.openssl.org/source/old/${OPENSSL_MAJOR_VERSION}/openssl-${OPENSSL_MAJOR_VERSION}${OPENSSL_PATCH_RELEASE}.tar.gz | tar xz \
+ && curl -sL https://www.openssl.org/source/openssl-${OPENSSL_MAJOR_VERSION}${OPENSSL_PATCH_RELEASE}.tar.gz | tar xz \
  && cd openssl-${OPENSSL_MAJOR_VERSION}${OPENSSL_PATCH_RELEASE} \
  && ./config \
  && make \
@@ -25,14 +25,14 @@ RUN cd /tmp \
  && cd /tmp \
  && rm /tmp/openssl-${OPENSSL_MAJOR_VERSION}${OPENSSL_PATCH_RELEASE} -fR
 
-FROM crystallang/crystal:0.33.0-alpine AS builder
+FROM crystallang/crystal:1.12-alpine AS builder
 COPY --from=libs /tmp/libcrypto.a /tmp/libssl.a /tmp/libssh2.a /tmp/
 WORKDIR /usr/src/app
 COPY shard.yml shard.lock ./
 RUN shards install
 COPY . .
-RUN crystal build src/swm.cr  --static --cross-compile \
- && cc 'swm.o' -o 'swm' -rdynamic -static /tmp/libssh2.a /tmp/libcrypto.a /tmp/libssl.a  /usr/lib/libpcre.a /usr/lib/libgc.a /usr/share/crystal/src/ext/libcrystal.a /usr/lib/libevent.a
+RUN CC_CMD="$(crystal build src/swm.cr  --static --cross-compile)"  \
+ && echo "$CC_CMD" | sed 's/-lssh2/\/tmp\/libssh2.a/' | sh
 
 FROM scratch
 COPY --from=builder /usr/src/app/swm /
