@@ -14,10 +14,10 @@ dependencies:
     branch: master
   ssh2:
     github: spider-gazelle/ssh2.cr
-    version: 1.4.0
+    version: 1.6.1
   poncho:
     github: icyleaf/poncho
-    version: 0.3.0
+    version: 0.4.0
 
 development_dependencies:
   spectator:

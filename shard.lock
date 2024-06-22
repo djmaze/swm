@@ -1,18 +1,18 @@
-version: 1.0
+version: 2.0
 shards:
   admiral:
-    github: djmaze/admiral.cr
-    commit: cc2e9626b7891bdba254bcd55b1dca9a57891fc5
+    git: https://github.com/djmaze/admiral.cr.git
+    version: 1.8.0+git.commit.cc2e9626b7891bdba254bcd55b1dca9a57891fc5
 
   poncho:
-    github: icyleaf/poncho
-    version: 0.3.0
+    git: https://github.com/icyleaf/poncho.git
+    version: 0.4.0
 
   spectator:
-    gitlab: arctic-fox/spectator
+    git: https://gitlab.com/arctic-fox/spectator.git
     version: 0.8.3
 
   ssh2:
-    github: spider-gazelle/ssh2.cr
-    version: 1.4.0
+    git: https://github.com/spider-gazelle/ssh2.cr.git
+    version: 1.6.1
 
